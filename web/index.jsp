@@ -24,7 +24,7 @@
         </div>
         
         <div class="form-section">
-            <form action="Login" >           
+            <form action="Login" method="post">           
             <div class="login-box">
                 <input type="text" 
                        class="email ele" 
@@ -32,7 +32,7 @@
                 <input type="password"
                        class="password ele" 
                        placeholder="password" name = "password">
-                <button class="clkbtn">Login</button>
+                <button type="submit" class="clkbtn">Login</button>
             </div>
                 </form>
             
