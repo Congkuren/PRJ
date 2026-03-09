@@ -18,6 +18,7 @@ import models.User;
  *
  * @author Admin
  */
+
 public class LoginServlet extends HttpServlet {
    
     /** 
@@ -56,18 +57,19 @@ public class LoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         //processRequest(request, response);
-        String name = request.getParameter("email");
-        String pass = request.getParameter("password");
-        UserDAO us = new UserDAO() ;
-        User user = us.getUser(name, pass);
-        if(user != null ){
-            
-        }
-        else{
-            request.getRequestDispatcher("index.jsp").forward(request, response);
-        
-    }
-    } 
+//        String name = request.getParameter("email");
+//        String pass = request.getParameter("password");
+//        UserDAO us = new UserDAO() ;
+//        User user = us.getUser(name, pass);
+//        if(user != null ){
+//            request.getRequestDispatcher("index2.jsp").forward(request, response);
+//            
+//        }
+//        else{
+//            request.getRequestDispatcher("index.jsp").forward(request, response);
+//        
+//    }
+   } 
 
     /** 
      * Handles the HTTP <code>POST</code> method.
@@ -77,10 +79,23 @@ public class LoginServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-        processRequest(request, response);
+  
+        protected void doPost(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException {
+
+    String name = request.getParameter("email");
+    String pass = request.getParameter("password");
+
+    UserDAO us = new UserDAO();
+    User user = us.getUser(name, pass);
+
+    if(user != null){
+        request.getRequestDispatcher("index2.jsp").forward(request, response);
+    } else{
+        request.getRequestDispatcher("index.jsp").forward(request, response);
     }
+}
+    
 
     /** 
      * Returns a short description of the servlet.

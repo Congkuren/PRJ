@@ -11,17 +11,10 @@ package models;
 public class User {
     private int userid;
     private String account;
-    private int password;
+    private String password;
     private String role;
 
     public User() {
-    }
-
-    public User(int userid, String account, int password, String role) {
-        this.userid = userid;
-        this.account = account;
-        this.password = password;
-        this.role = role;
     }
 
     public int getUserid() {
@@ -40,11 +33,11 @@ public class User {
         this.account = account;
     }
 
-    public int getPassword() {
+    public String getPassword() {
         return password;
     }
 
-    public void setPassword(int password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 
@@ -55,5 +48,13 @@ public class User {
     public void setRole(String role) {
         this.role = role;
     }
+
+    @Override
+    public String toString() {
+        return "name = " + this.account;
+        
+    }
+
+    
     
 }
