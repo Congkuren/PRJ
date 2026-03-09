@@ -228,3 +228,92 @@ header {
         font-size: 19px;
     }
 }
+body {
+    font-family: Arial, sans-serif;
+}
+
+/* ===== NAVBAR ===== */
+.navbar {
+    background-color: #f8f9fa;
+    padding: 15px 0;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    color: #f4b400 !important;
+    font-size: 24px;
+}
+
+.nav-link {
+    color: #333 !important;
+    font-size: 16px;
+    margin: 0 10px;
+    transition: 0.3s;
+}
+
+.nav-link:hover {
+    color: #f4b400 !important;
+}
+
+/* ===== BUTTONS ===== */
+.btn-login {
+    background-color: #e9ecef;
+    border: none;
+    font-size: 14px;
+}
+
+.btn-login:hover {
+    background-color: #d6d8db;
+}
+
+.btn-register {
+    background-color: #f4b400;
+    color: white;
+    border: none;
+    font-size: 14px;
+}
+
+.btn-register:hover {
+    background-color: #d89e00;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+    background-color: #333;
+    color: white;
+    padding: 40px 0;
+}
+
+.footer h5 {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.footer p {
+    font-size: 14px;
+}
+
+.footer hr {
+    border-color: #777;
+}
+/* Thu nhỏ chiều cao và điều chỉnh cỡ chữ */
+.input-group-sm > .form-control {
+    height: 35px;
+    font-size: 13px;
+}
+
+/* Hiệu ứng khi click vào thanh tìm kiếm */
+.form-control:focus {
+    border-color: #ffcc00 !important;
+}
+
+/* Đảm bảo navbar không bị nhảy dòng */
+.navbar-collapse {
+    align-items: center;
+}
+
+.navbar-nav .nav-link {
+    white-space: nowrap; /* Giữ menu không bị xuống dòng */
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+}
