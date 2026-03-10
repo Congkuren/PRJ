@@ -57,7 +57,7 @@
                     </div>
                     <!-- Nút bên phải -->
                     <div class="d-flex gap-2">
-                        <a href="login.jsp" class="btn btn-login px-3">Đăng nhập</a>
+                        <a href="Login.jsp" class="btn btn-login px-3">Đăng nhập</a>
                         <a href="register.jsp" class="btn btn-register px-3">Đăng ký</a>
                     </div>
 
