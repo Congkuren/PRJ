@@ -75,4 +75,8 @@ public class UserDAO  extends DBContext{
 
         return false;
     }
+    public static void main(String[] args) {
+            UserDAO us = new UserDAO();
+            us.register("kingkong2", "password", "student");
+    }
     }
