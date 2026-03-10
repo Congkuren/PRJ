@@ -12,14 +12,12 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import models.User;
 
 /**
  *
  * @author Admin
  */
-
-public class LoginServlet extends HttpServlet {
+public class RegisterServlet extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -36,10 +34,10 @@ public class LoginServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet LoginServlet</title>");  
+            out.println("<title>Servlet RegisterServlet</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet LoginServlet at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet RegisterServlet at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -56,8 +54,8 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-       
-   } 
+        processRequest(request, response);
+    } 
 
     /** 
      * Handles the HTTP <code>POST</code> method.
@@ -67,28 +65,18 @@ public class LoginServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-  
-        protected void doPost(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
-    String name = request.getParameter("account");
-    String pass = request.getParameter("password");
-    
-//    System.out.println("Account nhập vào: " + name);
-//    System.out.println("Password nhập vào: " + pass);
+        String account = request.getParameter("account");
+        String password = request.getParameter("password");
+        String role = request.getParameter("role");
 
-    UserDAO us = new UserDAO();
-    User user = us.getUser(name, pass);
+        UserDAO dao = new UserDAO();
+        dao.register(account, password, role);
 
-    if(user != null){
-        request.getRequestDispatcher("index2.jsp").forward(request, response);
-    } else{
-      request.setAttribute("error", "Sai tài khoản hoặc mật khẩu");
-request.getRequestDispatcher("index.jsp").forward(request, response);
-        
+        response.sendRedirect("index.jsp");
     }
-}
-    
 
     /** 
      * Returns a short description of the servlet.

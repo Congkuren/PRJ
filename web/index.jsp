@@ -36,7 +36,7 @@
                             Vững kỹ năng
                         </h1>
 
-                        <a href="#" class="btn btn-lg btn-warning rounded-pill px-5 py-3 mb-4">
+                        <a href="Login.jsp" class="btn btn-lg btn-warning rounded-pill px-5 py-3 mb-4">
                             Tham gia ngay
                         </a>
 
