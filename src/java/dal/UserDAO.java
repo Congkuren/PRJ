@@ -38,4 +38,41 @@ public class UserDAO  extends DBContext{
     }
     return null;
 }
+   public void register(String account, String password, String role){
+
+    String sql = "INSERT INTO Users(account,password,role) VALUES(?,?,?)";
+
+    try {
+        PreparedStatement ps = connection.prepareStatement(sql);
+
+        ps.setString(1, account);
+        ps.setString(2, password);
+        ps.setString(3, role);
+
+        ps.executeUpdate();
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
+   public boolean checkAccount(String account){
+
+        String sql = "SELECT * FROM Users WHERE account=?";
+
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setString(1, account);
+
+            ResultSet rs = ps.executeQuery();
+
+            if(rs.next()){
+                return true;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
     }
