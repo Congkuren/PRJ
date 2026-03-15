@@ -36,6 +36,7 @@ public class UserDAO extends DBContext {
                 u.setPassword(rs.getString("password"));
                 u.setUserid(rs.getInt("user_id"));
                 u.setRole(rs.getString("role"));
+                u.setStatus(rs.getInt("status"));
                 return u;
             }
         } catch (Exception e) {
@@ -178,10 +179,8 @@ public class UserDAO extends DBContext {
     }
 
     public List<User> getAllUsers() {
-
         List<User> list = new ArrayList<>();
-
-        String sql = "SELECT * FROM Users WHERE role IN ('student','teacher') AND status = 1";
+        String sql = "SELECT * FROM Users WHERE role <> 'admin'";
 
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -194,6 +193,7 @@ public class UserDAO extends DBContext {
                 u.setUserid(rs.getInt("user_id"));
                 u.setAccount(rs.getString("account"));
                 u.setRole(rs.getString("role"));
+                u.setStatus(rs.getInt("status"));   // QUAN TRỌNG
 
                 list.add(u);
             }
@@ -205,20 +205,27 @@ public class UserDAO extends DBContext {
         return list;
     }
 
-    public void deleteUser(int id) {
-
-       String sql = "UPDATE Users SET status = 0 WHERE user_id=?";
+    public void banUser(int id) {
+        String sql = "UPDATE Users SET status = 0 WHERE user_id = ?";
 
         try {
-
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, id);
-
             ps.executeUpdate();
-
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
 
+    public void unbanUser(int id) {
+        String sql = "UPDATE Users SET status = 1 WHERE user_id = ?";
+
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, id);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
