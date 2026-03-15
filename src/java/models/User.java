@@ -13,6 +13,7 @@ public class User {
     private String account;
     private String password;
     private String role;
+    private int status;
 
     public User() {
     }
@@ -53,6 +54,14 @@ public class User {
     public String toString() {
         return "name = " + this.account;
         
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     

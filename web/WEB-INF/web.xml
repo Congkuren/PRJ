@@ -21,8 +21,12 @@
         <servlet-class>controller.AdminServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>DeleteUserServlet</servlet-name>
-        <servlet-class>controller.DeleteUserServlet</servlet-class>
+        <servlet-name>BanUserServlet</servlet-name>
+        <servlet-class>controller.BanUserServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UnbanUserServlet</servlet-name>
+        <servlet-class>controller.UnbanUserServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
@@ -45,7 +49,11 @@
         <url-pattern>/AdminServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>DeleteUserServlet</servlet-name>
-        <url-pattern>/DeleteUserServlet</url-pattern>
+        <servlet-name>BanUserServlet</servlet-name>
+        <url-pattern>/BanUserServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UnbanUserServlet</servlet-name>
+        <url-pattern>/UnbanUserServlet</url-pattern>
     </servlet-mapping>
 </web-app>
