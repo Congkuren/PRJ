@@ -9,19 +9,16 @@ import dal.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import models.User;
-
 /**
  *
  * @author Admin
  */
-
-public class LoginServlet extends HttpServlet {
+public class UpdateProfileServlet extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -38,10 +35,10 @@ public class LoginServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet LoginServlet</title>");  
+            out.println("<title>Servlet UpdateProfileServlet</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet LoginServlet at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet UpdateProfileServlet at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -56,10 +53,25 @@ public class LoginServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-       
-   } 
+   protected void doGet(HttpServletRequest request, HttpServletResponse response)
+        throws ServletException, IOException {
+
+    HttpSession session = request.getSession();
+    User user = (User) session.getAttribute("user");
+
+    UserDAO dao = new UserDAO();
+    Object profile;
+
+    if(user.getRole().equals("teacher")){
+        profile = dao.getTeacher(user.getUserid());
+    }else{
+        profile = dao.getStudent(user.getUserid());
+    }
+
+    request.setAttribute("profile", profile);
+
+    request.getRequestDispatcher("profile.jsp").forward(request, response);
+}
 
     /** 
      * Handles the HTTP <code>POST</code> method.
@@ -69,43 +81,33 @@ public class LoginServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-  
-       protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
 
-    String name = request.getParameter("account");
-    String pass = request.getParameter("password");
-
-    UserDAO us = new UserDAO();
-    User user = us.getUser(name, pass);
-
-   String remember = request.getParameter("remember");
-
-if(user != null){
-
     HttpSession session = request.getSession();
-    session.setAttribute("user", user);
+    User user = (User) session.getAttribute("user");
 
-    if(remember != null){
+    String name = request.getParameter("name");
+    String email = request.getParameter("email");
+    String phone = request.getParameter("phone");
+    String dob = request.getParameter("dob");
+    String experience = request.getParameter("experience");
 
-        Cookie cUser = new Cookie("account", name);
-        Cookie cPass = new Cookie("password", pass);
+    UserDAO dao = new UserDAO();
 
-        cUser.setMaxAge(60*60*24*7); // 7 ngày
-        cPass.setMaxAge(60*60*24*7);
-
-        response.addCookie(cUser);
-        response.addCookie(cPass);
-
+    if(user.getRole().equals("teacher")){
+        
+        dao.updateTeacher(user.getUserid(), name, email, phone, experience);
+        
+    }else if(user.getRole().equals("student")){
+        
+        dao.updateStudent(user.getUserid(), name, dob, email, phone);
+        
     }
 
-    response.sendRedirect("index.jsp");
+    response.sendRedirect("UpdateProfileServlet");
+}
 
-}else{
-    request.setAttribute("error", "Sai tài khoản hoặc mật khẩu");
-    request.getRequestDispatcher("Login.jsp").forward(request, response);
-}
-}
     /** 
      * Returns a short description of the servlet.
      * @return a String containing servlet description

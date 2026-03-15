@@ -74,11 +74,12 @@ public class RegisterServlet extends HttpServlet {
 
         UserDAO dao = new UserDAO();      
 if(dao.checkAccount(account)){
-    request.setAttribute("error","Account already exists");
+    request.setAttribute("error","tài khoản đã tồn tại");
     request.getRequestDispatcher("register.jsp").forward(request, response);
 }else{
     dao.register(account, password, role);
-    response.sendRedirect("index.jsp");
+    request.setAttribute("success","đăng ký thành công");
+    request.getRequestDispatcher("Login.jsp").forward(request, response);
     
 }
     }
