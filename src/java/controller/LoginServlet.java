@@ -81,10 +81,10 @@ public class LoginServlet extends HttpServlet {
     User user = us.getUser(name, pass);
 
     if(user != null){
-        request.getRequestDispatcher("index2.jsp").forward(request, response);
+        request.getRequestDispatcher("index.jsp").forward(request, response);
     } else{
       request.setAttribute("error", "Sai tài khoản hoặc mật khẩu");
-request.getRequestDispatcher("index.jsp").forward(request, response);
+request.getRequestDispatcher("Login.jsp").forward(request, response);
         
     }
 }

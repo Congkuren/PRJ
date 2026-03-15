@@ -72,10 +72,15 @@ public class RegisterServlet extends HttpServlet {
         String password = request.getParameter("password");
         String role = request.getParameter("role");
 
-        UserDAO dao = new UserDAO();
-        dao.register(account, password, role);
-
-        response.sendRedirect("index.jsp");
+        UserDAO dao = new UserDAO();      
+if(dao.checkAccount(account)){
+    request.setAttribute("error","Account already exists");
+    request.getRequestDispatcher("register.jsp").forward(request, response);
+}else{
+    dao.register(account, password, role);
+    response.sendRedirect("index.jsp");
+    
+}
     }
 
     /** 
