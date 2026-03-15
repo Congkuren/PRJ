@@ -1,0 +1,96 @@
+/* nền */
+body{
+    background: linear-gradient(135deg,#eef2ff,#f8fbff);
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* card */
+.container{
+    background:white;
+    padding:30px;
+    border-radius:12px;
+    box-shadow:0 8px 25px rgba(0,0,0,0.08);
+}
+
+/* tiêu đề */
+h3{
+    font-weight:700;
+    color:#4e73df;
+    margin-bottom:25px;
+}
+
+/* bảng */
+.table{
+    border-radius:10px;
+    overflow:hidden;
+}
+
+/* header bảng */
+.table thead{
+    background: linear-gradient(90deg,#4e73df,#6f8cff);
+    color:white;
+}
+
+.table thead th{
+    text-align:center;
+    font-weight:600;
+}
+
+/* dòng bảng */
+.table td{
+    text-align:center;
+    vertical-align:middle;
+}
+
+/* hover */
+.table tbody tr{
+    transition:0.2s;
+}
+
+.table tbody tr:hover{
+    background:#eef3ff;
+    transform:scale(1.01);
+}
+
+/* zebra */
+.table tbody tr:nth-child(even){
+    background:#fafbff;
+}
+
+/* role badge */
+.role-admin{
+    background:#ff6b6b;
+    color:white;
+    padding:4px 10px;
+    border-radius:20px;
+    font-size:12px;
+}
+
+.role-teacher{
+    background:#4dabf7;
+    color:white;
+    padding:4px 10px;
+    border-radius:20px;
+    font-size:12px;
+}
+
+.role-student{
+    background:#51cf66;
+    color:white;
+    padding:4px 10px;
+    border-radius:20px;
+    font-size:12px;
+}
+
+/* responsive */
+@media (max-width:768px){
+
+.container{
+padding:15px;
+}
+
+.table{
+font-size:14px;
+}
+
+}

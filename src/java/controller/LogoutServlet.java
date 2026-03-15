@@ -5,7 +5,6 @@
 
 package controller;
 
-import dal.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -14,14 +13,12 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import models.User;
 
 /**
  *
  * @author Admin
  */
-
-public class LoginServlet extends HttpServlet {
+public class LogoutServlet extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -38,10 +35,10 @@ public class LoginServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet LoginServlet</title>");  
+            out.println("<title>Servlet LogoutServlet</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet LoginServlet at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet LogoutServlet at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -56,10 +53,28 @@ public class LoginServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-       
-   } 
+      protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        // xóa session
+        HttpSession session = request.getSession(false);
+        if(session != null){
+            session.invalidate();
+        }
+
+        // xóa cookie ghi nhớ đăng nhập
+        Cookie cUser = new Cookie("account", "");
+        Cookie cPass = new Cookie("password", "");
+
+        cUser.setMaxAge(0);
+        cPass.setMaxAge(0);
+
+        response.addCookie(cUser);
+        response.addCookie(cPass);
+
+        // quay về trang chủ
+        response.sendRedirect("index.jsp");
+    }
 
     /** 
      * Handles the HTTP <code>POST</code> method.
@@ -69,43 +84,11 @@ public class LoginServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-  
-       protected void doPost(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException {
-
-    String name = request.getParameter("account");
-    String pass = request.getParameter("password");
-
-    UserDAO us = new UserDAO();
-    User user = us.getUser(name, pass);
-
-   String remember = request.getParameter("remember");
-
-if(user != null){
-
-    HttpSession session = request.getSession();
-    session.setAttribute("user", user);
-
-    if(remember != null){
-
-        Cookie cUser = new Cookie("account", name);
-        Cookie cPass = new Cookie("password", pass);
-
-        cUser.setMaxAge(60*60*24*7); // 7 ngày
-        cPass.setMaxAge(60*60*24*7);
-
-        response.addCookie(cUser);
-        response.addCookie(cPass);
-
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    throws ServletException, IOException {
+        processRequest(request, response);
     }
 
-    response.sendRedirect("index.jsp");
-
-}else{
-    request.setAttribute("error", "Sai tài khoản hoặc mật khẩu");
-    request.getRequestDispatcher("Login.jsp").forward(request, response);
-}
-}
     /** 
      * Returns a short description of the servlet.
      * @return a String containing servlet description
