@@ -24,6 +24,22 @@
         <servlet-name>DeleteUserServlet</servlet-name>
         <servlet-class>controller.DeleteUserServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>TeacherClassServlet</servlet-name>
+        <servlet-class>controller.TeacherClassServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AttendanceServlet</servlet-name>
+        <servlet-class>controller.AttendanceServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>TeacherServlet</servlet-name>
+        <servlet-class>controller.TeacherServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AttendanceServlett</servlet-name>
+        <servlet-class>controller.AttendanceServlett</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -47,5 +63,21 @@
     <servlet-mapping>
         <servlet-name>DeleteUserServlet</servlet-name>
         <url-pattern>/DeleteUserServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TeacherClassServlet</servlet-name>
+        <url-pattern>/TeacherClassServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AttendanceServlet</servlet-name>
+        <url-pattern>/AttendanceServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TeacherServlet</servlet-name>
+        <url-pattern>/TeacherServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AttendanceServlett</servlet-name>
+        <url-pattern>/AttendanceServlett</url-pattern>
     </servlet-mapping>
 </web-app>

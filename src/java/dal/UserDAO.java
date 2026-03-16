@@ -221,4 +221,20 @@ public class UserDAO extends DBContext {
         }
 
     }
+    public void saveAttendance(int studentId, String status){
+
+    String sql = "INSERT INTO Attendance(student_id,status,date) VALUES(?,?,GETDATE())";
+
+    try{
+        PreparedStatement ps = connection.prepareStatement(sql);
+
+        ps.setInt(1, studentId);
+        ps.setString(2, status);
+
+        ps.executeUpdate();
+
+    }catch(Exception e){
+        e.printStackTrace();
+    }
+}
 }
