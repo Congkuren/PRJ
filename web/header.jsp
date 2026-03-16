@@ -78,9 +78,22 @@
                                         data-bs-toggle="dropdown"
                                         aria-expanded="false">
                                     ${sessionScope.user.account}
+
                                 </button>
 
                                 <ul class="dropdown-menu dropdown-menu-end">
+
+                                    <c:if test="${sessionScope.user.role == 'student'}">
+
+                                        <li>
+                                            <a class="dropdown-item" href="student.jsp">
+                                                Trang sinh viên
+                                            </a>
+                                        </li>
+
+                                    </c:if>
+
+
 
                                     <li>
                                         <a class="dropdown-item" href="UpdateProfileServlet">
