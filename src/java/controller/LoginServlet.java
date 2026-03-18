@@ -100,7 +100,7 @@ public class LoginServlet extends HttpServlet {
 
         // kiểm tra role
         if(user.getRole().equals("teacher")){
-            response.sendRedirect("teacher.jsp");
+            response.sendRedirect("TeacherClassServlet");
         }else{
             response.sendRedirect("index.jsp");
         }

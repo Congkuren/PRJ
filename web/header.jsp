@@ -92,11 +92,11 @@
                                         <hr class="dropdown-divider">
                                     </li>
 
-                                    <li>
-                                        <a class="dropdown-item text-danger" href="LogoutServlet">
-                                            Đăng xuất
-                                        </a>
-                                    </li>
+                                    <li class="px-3 py-2">
+    <a class="btn btn-outline-danger w-100" href="LogoutServlet">
+        Dang xuat
+    </a>
+</li>
 
                                 </ul>
 

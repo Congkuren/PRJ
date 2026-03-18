@@ -8,7 +8,7 @@
         <title>Chỉnh sửa thông tin</title>
 
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    </head>
+        <link rel="stylesheet" href="css/style.css">`r`n    </head>
 
     <body>
 
@@ -80,5 +80,6 @@
 
         </div>
 
-    </body>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>

@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap");
 
 
 /* For Responsiveness of the page */
@@ -107,7 +107,57 @@
     }
 }
 body {
-    font-family: Arial, sans-serif;
+    font-family: "Be Vietnam Pro", "Segoe UI", Arial, sans-serif;
+    min-height: 100vh;
+    background:
+        radial-gradient(900px 500px at 8% -10%, rgba(244, 180, 0, 0.18), transparent 60%),
+        radial-gradient(800px 500px at 92% 10%, rgba(0, 123, 255, 0.12), transparent 60%),
+        linear-gradient(180deg, #f8f9fc 0%, #eef2f7 55%, #f8f9fc 100%);
+    background-attachment: fixed;
+}
+
+/* ===== DASHBOARD PAGES ===== */
+.page-shell {
+    padding: 40px 0 60px;
+}
+
+.page-hero {
+    gap: 16px;
+}
+
+.page-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 6px;
+}
+
+.page-subtitle {
+    color: #6b7280;
+    margin-bottom: 0;
+}
+
+.table-card {
+    border: 0;
+    border-radius: 16px;
+    padding: 20px;
+    background: #ffffff;
+    box-shadow: 0 12px 30px rgba(16, 24, 40, 0.08);
+}
+
+.table-card .table {
+    margin-bottom: 0;
+}
+
+.table thead th {
+    background: #1f2937 !important;
+    color: #ffffff !important;
+}
+
+.action-bar {
+    margin-top: 16px;
+    display: flex;
+    gap: 12px;
 }
 
 /* ===== NAVBAR ===== */

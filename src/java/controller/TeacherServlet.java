@@ -5,15 +5,17 @@
 
 package controller;
 
-import dal.StudentDAO;
+import dal.ClassDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.List;
 import models.Student;
+import models.User;
 
 /**
  *
@@ -56,13 +58,35 @@ public class TeacherServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        //processRequest(request, response);
-       
-        StudentDAO dao = new StudentDAO();
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
 
-        List<Student> list = dao.getAllStudents();
+        if (user == null || !"teacher".equals(user.getRole())) {
+            response.sendRedirect("Login.jsp");
+            return;
+        }
+
+        String classIdRaw = request.getParameter("classId");
+        if (classIdRaw == null || classIdRaw.trim().isEmpty()) {
+            response.sendRedirect("TeacherClassServlet");
+            return;
+        }
+
+        int classId;
+        try {
+            classId = Integer.parseInt(classIdRaw);
+        } catch (NumberFormatException e) {
+            response.sendRedirect("TeacherClassServlet");
+            return;
+        }
+
+        ClassDAO dao = new ClassDAO();
+        List<Student> list = dao.getStudentsByClass(classId);
+        String className = dao.getClassName(classId);
 
         request.setAttribute("studentList", list);
+        request.setAttribute("classId", classId);
+        request.setAttribute("className", className);
 
         request.getRequestDispatcher("teacher.jsp").forward(request, response);
     

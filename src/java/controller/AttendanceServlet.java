@@ -14,13 +14,14 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
+import java.util.ArrayList;
 import models.Student;
 
 /**
  *
  * @author DELL
  */
-public class AttendanceServlett extends HttpServlet {
+public class AttendanceServlet extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -37,10 +38,10 @@ public class AttendanceServlett extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AttendanceServlett</title>");  
+            out.println("<title>Servlet AttendanceServlet</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AttendanceServlett at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet AttendanceServlet at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -57,16 +58,7 @@ public class AttendanceServlett extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        //processRequest(request, response);
-        
-        int classId = Integer.parseInt(request.getParameter("classId"));
-
-        ClassDAO classDao = new ClassDAO();
-        List<Student> list = classDao.getStudentsByClass(classId);
-
-        request.setAttribute("listStudent", list);
-
-        request.getRequestDispatcher("attendance.jsp").forward(request, response);
+        processRequest(request, response);
     } 
 
     /** 
@@ -81,16 +73,56 @@ public class AttendanceServlett extends HttpServlet {
     throws ServletException, IOException {
         //processRequest(request, response);
         StudentDAO dao = new StudentDAO();
-        List<Student> list = dao.getAllStudents();
+        String classIdRaw = request.getParameter("classId");
+        List<Student> list;
+        String className = null;
 
-        for(Student s : list){
-
-            String status = request.getParameter("attendance_" + s.getUserId());
-
-            dao.saveAttendance(s.getUserId(), status);
+        if (classIdRaw != null && !classIdRaw.trim().isEmpty()) {
+            try {
+                int classId = Integer.parseInt(classIdRaw);
+                ClassDAO classDao = new ClassDAO();
+                list = classDao.getStudentsByClass(classId);
+                className = classDao.getClassName(classId);
+            } catch (NumberFormatException e) {
+                list = dao.getAllStudents();
+            }
+        } else {
+            list = dao.getAllStudents();
         }
 
-        response.sendRedirect("TeacherClassServlet");
+        int presentCount = 0;
+        int absentCount = 0;
+        int totalCount = 0;
+
+        List<Student> presentStudents = new ArrayList<>();
+        List<Student> absentStudents = new ArrayList<>();
+
+        for (Student s : list) {
+            String status = request.getParameter("attendance_" + s.getUserId());
+            if ("present".equals(status)) {
+                presentCount++;
+                presentStudents.add(s);
+            } else if ("absent".equals(status)) {
+                absentCount++;
+                absentStudents.add(s);
+            }
+
+            if (status != null) {
+                dao.saveAttendance(s.getUserId(), status);
+            }
+        }
+
+        totalCount = (list == null) ? 0 : list.size();
+
+        request.setAttribute("presentCount", presentCount);
+        request.setAttribute("absentCount", absentCount);
+        request.setAttribute("totalCount", totalCount);
+        request.setAttribute("presentStudents", presentStudents);
+        request.setAttribute("absentStudents", absentStudents);
+        request.setAttribute("className", className);
+        request.setAttribute("classId", classIdRaw);
+
+        request.getRequestDispatcher("attendance-success.jsp").forward(request, response);
     }
 
     /** 

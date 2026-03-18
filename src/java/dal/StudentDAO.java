@@ -12,7 +12,12 @@ public class StudentDAO extends DBContext {
 
         List<Student> list = new ArrayList<>();
 
-        String sql = "SELECT user_id,name,email,phone,dob FROM Students";
+        String sql = "SELECT u.user_id, "
+                   + "COALESCE(s.name, 'Chua cap nhat') AS name, "
+                   + "COALESCE(s.email, u.account) AS email "
+                   + "FROM Users u "
+                   + "LEFT JOIN Students s ON u.user_id = s.user_id "
+                   + "WHERE u.role = 'student' AND u.status = 1";
 
         try{
 
@@ -26,8 +31,6 @@ public class StudentDAO extends DBContext {
                 s.setUserId(rs.getInt("user_id"));
                 s.setName(rs.getString("name"));
                 s.setEmail(rs.getString("email"));
-                s.setPhone(rs.getString("phone"));
-                s.setDob(rs.getDate("dob"));
 
                 list.add(s);
             }

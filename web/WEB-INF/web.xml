@@ -29,16 +29,12 @@
         <servlet-class>controller.TeacherClassServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>AttendanceServlet</servlet-name>
-        <servlet-class>controller.AttendanceServlet</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>TeacherServlet</servlet-name>
         <servlet-class>controller.TeacherServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>AttendanceServlett</servlet-name>
-        <servlet-class>controller.AttendanceServlett</servlet-class>
+        <servlet-name>AttendanceServlet</servlet-name>
+        <servlet-class>controller.AttendanceServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
@@ -75,9 +71,5 @@
     <servlet-mapping>
         <servlet-name>TeacherServlet</servlet-name>
         <url-pattern>/TeacherServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>AttendanceServlett</servlet-name>
-        <url-pattern>/AttendanceServlett</url-pattern>
     </servlet-mapping>
 </web-app>

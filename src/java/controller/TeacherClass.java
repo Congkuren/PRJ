@@ -5,22 +5,18 @@
 
 package controller;
 
-import dal.ClassDAO;
-import dal.StudentDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
-import models.Student;
 
 /**
  *
  * @author DELL
  */
-public class AttendanceServlett extends HttpServlet {
+public class TeacherClass extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -37,10 +33,10 @@ public class AttendanceServlett extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AttendanceServlett</title>");  
+            out.println("<title>Servlet TeacherClass</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AttendanceServlett at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet TeacherClass at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -57,16 +53,7 @@ public class AttendanceServlett extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        //processRequest(request, response);
-        
-        int classId = Integer.parseInt(request.getParameter("classId"));
-
-        ClassDAO classDao = new ClassDAO();
-        List<Student> list = classDao.getStudentsByClass(classId);
-
-        request.setAttribute("listStudent", list);
-
-        request.getRequestDispatcher("attendance.jsp").forward(request, response);
+        processRequest(request, response);
     } 
 
     /** 
@@ -79,18 +66,7 @@ public class AttendanceServlett extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        //processRequest(request, response);
-        StudentDAO dao = new StudentDAO();
-        List<Student> list = dao.getAllStudents();
-
-        for(Student s : list){
-
-            String status = request.getParameter("attendance_" + s.getUserId());
-
-            dao.saveAttendance(s.getUserId(), status);
-        }
-
-        response.sendRedirect("TeacherClassServlet");
+        processRequest(request, response);
     }
 
     /** 
