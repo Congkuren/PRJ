@@ -21,6 +21,18 @@
         <servlet-class>controller.AdminServlet</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>StudentClassesServlet</servlet-name>
+        <servlet-class>controller.StudentClassesServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AttendanceServlet</servlet-name>
+        <servlet-class>controller.AttendanceServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CoursesServlet</servlet-name>
+        <servlet-class>controller.CoursesServlet</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>BanUserServlet</servlet-name>
         <servlet-class>controller.BanUserServlet</servlet-class>
     </servlet>
@@ -47,6 +59,18 @@
     <servlet-mapping>
         <servlet-name>AdminServlet</servlet-name>
         <url-pattern>/AdminServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StudentClassesServlet</servlet-name>
+        <url-pattern>/StudentClassesServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AttendanceServlet</servlet-name>
+        <url-pattern>/AttendanceServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CoursesServlet</servlet-name>
+        <url-pattern>/CoursesServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>BanUserServlet</servlet-name>
